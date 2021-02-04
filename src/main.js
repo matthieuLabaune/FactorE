@@ -8,6 +8,3 @@ new Vue({
   render: h => h(AuthWrapper)
 }).$mount("#app");
 
-// new Vue({
-//   render: h => h(App),
-// }).$mount('#app');

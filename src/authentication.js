@@ -1,11 +1,11 @@
 const users = [
     {
-      email: "jim@example.com",
-      password: "j1m"
+        username: "emilie",
+      password: "lol"
     },
     {
-      email: "bob@example.com",
-      password: "b0b"
+        username: "marc",
+      password: "ok"
     }
   ];
   
@@ -15,8 +15,8 @@ const users = [
 //    *
 //    * @return {?Object}
 //    */
-  function login(email, password) {
-    return users.find(user => user.email === email && user.password === password) || null;
+  function login(username, password) {
+    return users.find(user => user.username === username && user.password === password) || null;
   }
   
   export { login };

@@ -19,8 +19,8 @@ export default {
   },
 
   methods: {
-    login({ email, password }) {
-        this.user = login(email, password);
+    login({ username, password }) {
+        this.user = login(username, password);
         this.errorMessage = this.user ? "" : "Mec, t'es comme le ç de Hawaï, t'existes pas.";
     }
   },

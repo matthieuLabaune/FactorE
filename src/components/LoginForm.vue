@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="submit()">
     <p v-if="errorMessage" class="error">{{ this.errorMessage }}</p>
-    <input type="email" v-model="email" />
+    <input type="username" v-model="username" />
     <input type="password" v-model="password" />
     <button type="submit">Log in</button>
   </form>
@@ -19,7 +19,7 @@ export default {
   methods: {
     submit() {
       this.$emit("submit", {
-        email: this.email,
+        username: this.username,
         password: this.password
       });
     }
