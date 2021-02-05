@@ -1,30 +1,53 @@
 <template>
   <div>
-    <App v-if="user" />
+    <div v-if="$auth.user">
+      <button type="button" @click="$auth.logout">Log out</button>
+      <App />
+    </div>
     <LoginForm v-else :errorMessage="errorMessage" @submit="login" />
   </div>
 </template>
 
 <script>
-import { login } from "../authentication";
-import App from "./../App";
+import App from "../App";
 import LoginForm from "./LoginForm";
 
 export default {
+  props: {
+    auth: {
+      type: Object,
+      required: true,
+      validator: (auth) =>
+        ["getConnectedUser", "login", "logout"].every(
+          (method) => method in auth && typeof auth[method] === "function"
+        ),
+    },
+  },
+
   data() {
     return {
-      user: null,
-      errorMessage: ""
+      errorMessage: "",
     };
   },
 
   methods: {
-    login({ username, password }) {
-        this.user = login(username, password);
-        this.errorMessage = this.user ? "" : "Mec, t'es comme le ç de Hawaï, t'existes pas.";
-    }
+    login({ email, password }) {
+      this.$auth.login(email, password);
+
+      if (!this.$auth.user) {
+        this.errorMessage = "Authentication failed, please try again";
+      }
+    },
+
+    logout() {
+      this.auth.logout();
+    },
   },
 
-  components: { App, LoginForm }
+ created() {
+    this.$auth.init();
+  },
+
+  components: { App, LoginForm },
 };
 </script>

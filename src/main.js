@@ -1,8 +1,20 @@
 import Vue from 'vue'
-import App from './App.vue'
+import getAuthentication from "./getAuthentication";
 import AuthWrapper from "./components/AuthWrapper";
+import AuthPlugin from "./plugin";
 
-Vue.config.productionTip = false
+Vue.use(AuthPlugin, {
+  auth: getAuthentication([
+    {
+      username: "marc",
+      password: "ok"
+    },
+    {
+      username: "test",
+      password: "test"
+    }
+  ])
+});
 
 new Vue({
   render: h => h(AuthWrapper)
